@@ -37,6 +37,7 @@ tema_grafII <- function() {
 }
 
 Atosv <- read_excel("extrem.xlsx",   sheet = "Atosv")
+# substitua pelo endereço do arquivo 
 
 Casos <- Atosv %>% 
   group_by(Ano) %>% 
@@ -83,6 +84,7 @@ ufv %>%
 
 ##################### Crimes de Ódio - Racismo Injúria e Transfobia #############################
 
+# substitua pelo endereço do arquivo
 Extrem <- read_excel("extrem.xlsx", sheet = "geral")
 
 Extrem %>% 
@@ -187,17 +189,18 @@ ggplot(uf %>% filter(uf != "RJ" & uf != "BA" & uf!= "MA" & uf != "TO" &
 
 ######################### Crimes de Ódio - Internet ################################
 
+# substitua pelo endereço do arquivo
 odio <- read_excel("extrem.xlsx", sheet = "Odio")
 odio2022 <- read_excel("extrem.xlsx", sheet = "Odio2022")
-misog <- read_excel("extrem.xlsx", sheet = "misogeniasafernet")
+misog <- read_excel("extrem.xlsx", sheet = "misogenia")
 
 ggplot(odio, aes(x = Ano, y = n/1000, color = "n")) +
   geom_line(size = 1, color = "#606060") +
   geom_smooth(method = "lm", se = FALSE, color = "#A2A19F", linetype = "dashed") +
   scale_x_continuous(breaks = seq(2017, 2022, 1)) +ylab("Mil")+
   scale_y_continuous(breaks = seq(0, 350, 50), limits = c(0, 350)) +
-  tema_graf()+labs(title = "Gráfico 01 - Número de Crimes de Ódio Denunciados
-                                    na Internet (2017-2022)", caption = 'Fonte: Safernet.
+  tema_graf()+labs(title = "Gráfico 01 - Número de Crimes de Ódio Cometidos na Internet
+                            Denunciados (2017-2022)", caption = 'Fonte: Safernet.
     Elaboração dos Autores.')
 
 
@@ -207,20 +210,20 @@ ggplot(odio2022, aes(x = reorder(Tipo, n/1000), y = n/1000)) +
   coord_flip()+theme(axis.text.y = element_text(size = 9))+
   geom_text(aes(label = n/1000), hjust = -0.5, color = "black", size = 3) +
   scale_y_continuous(breaks = seq(0,100, 10), limits = c(0,100))+
-  tema_grafII()+ylab("Mil")+
-  labs(title = "Gráfico 04 -  Número de Crimes de Ódio Denunciados
-                              Na Internet por Tipo (2022)", 
+  tema_grafII()+ylab(" ")+
+  labs(title = "Gráfico 04 -  Número de Crimes de Ódio Cometidos 
+                 na Internet Denunciados por Tipo (2022)", 
        caption = 'Fonte: Safernet.
-    Elaboração dos Autores.' )+
-  geom_bar(data = . %>% filter(Tipo == "Misogenia"), stat = "identity", color = "#606060",
-           fill = "#606060", width = 0.9) 
+    Elaboração dos Autores.' )
+  #geom_bar(data = . %>% filter(Tipo == "Misogenia"), stat = "identity", color = "#606060",
+           #fill = "#606060", width = 0.9) 
 
 
 ggplot(misog, aes(x = Ano, y = n/1000, color = "n")) +
   geom_line(size = 1, color = "#606060") +
   geom_smooth(method = "lm", se = FALSE, color = "#A2A19F", linetype = "dashed") +
-  scale_x_continuous(breaks = seq(2017, 2022, 1)) +ylab("Mil")+
+  scale_x_continuous(breaks = seq(2017, 2022, 1)) +ylab(" ")+
   scale_y_continuous(breaks = seq(0, 50, 10), limits = c(0, 50)) +
-  tema_graf()+labs(title = "Grafico 01 - Número de Crimes de Ódio Denunciados - Misogenia
-                                                        (2017-2022)", caption = 'Fonte: Safernet.
+  tema_graf()+labs(title = "Grafico 01 - Número de Crimes de Ódio Cometidos na Internet
+                            Denunciados - Misogenia  (2017-2022)", caption = 'Fonte: Safernet.
     Elaboração dos Autores.')+xlab(" ")
