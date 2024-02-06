@@ -102,7 +102,7 @@ ggplot(aes(x=Ano )) +
   scale_x_continuous(breaks = seq(2002, 2023, 1))+
   scale_y_continuous(
     breaks = seq(0,20000, 2000), limits = c(0,20000))+
-  labs(title = "Gráfico 05 - Registros de Racismo e Injúria Racial
+  labs(title = "Gráfico 05 - Registros de Casos de Racismo e de Injúria Racial
                                          (2018-2022)") +
   tema_grafII()
  
@@ -122,8 +122,8 @@ Extrem %>%
   scale_x_continuous(breaks = seq(2002, 2023, 1))+
   scale_y_continuous(
     breaks = seq(0,2500, 500), limits = c(0,2500))+
-  labs(title = "Gráfico 06 - Registros de Lesão Corporal e Homicídio (LGBTQIA+)
-                                                  (2018-2022)")+
+  labs(title = "Gráfico 06 - Registros de Casos de Lesão Corporal e Homicídio
+                                      (LGBTQIA+) (2018-2022)")+
   tema_grafII()
   
 
@@ -159,7 +159,8 @@ ggplot(uf, aes(x = reorder(uf, Racismo), y = Racismo)) +
   coord_flip()+theme(axis.text.y = element_text(size = 9))+
   geom_text(aes(label = Racismo), hjust = -0.5, color = "black", size = 3) +
   scale_y_continuous(breaks = seq(0,25, 5), limits = c(0,25))+
-  labs(title = "Gráfico 07 - Média da Taxa de Registros de Racismo nos Estados")+
+  labs(title = "Gráfico 07 - Média da Taxa de Registros de Casos de Racismo
+                                              nos Estados")+
   geom_bar(data = . %>% filter(uf == "BR"), stat = "identity", color = "#606060",
            fill = "#606060", width = 0.9) +tema_grafII()
 
@@ -170,8 +171,8 @@ ggplot(uf %>% filter(uf != "ES"), aes(x = reorder(uf, Injúria), y = Injúria)) 
   geom_text(aes(label = Injúria), hjust = -0.5, color = "black", size = 3) +
  coord_flip()+theme(axis.text.y = element_text(size = 9))+
   scale_y_continuous(breaks = seq(0,35, 5), limits = c(0,35))+
-  labs(title = "Gráfico 08 - Média da Taxa de Registros de Injúria Racial nos Estados
-                                          (2018-2022)")+
+  labs(title = "Gráfico 08 - Média da Taxa de Registros de Casos de Injúria Racial
+                                  nos Estados (2018-2022)")+
   geom_bar(data = . %>% filter(uf == "BR"), stat = "identity", color = "#606060",
            fill = "#606060", width = 0.9)+tema_grafII()
 
@@ -203,8 +204,8 @@ ggplot(odio, aes(x = Ano, y = n/1000, color = "n")) +
   geom_smooth(method = "lm", se = FALSE, color = "#A2A19F", linetype = "dashed") +
   scale_x_continuous(breaks = seq(2017, 2022, 1)) +ylab("Mil")+
   scale_y_continuous(breaks = seq(0, 350, 50), limits = c(0, 350)) +
-  tema_graf()+labs(title = "Gráfico 01 - Crimes de Ódio Cometidos na Internet e
-                            Denunciados (2017-2022)", caption = 'Fonte: ObservaDH / Safernet.
+  tema_graf()+labs(title = "Gráfico 01 - Casos de Crimes de Ódio Cometidos na Internet e
+                                Denunciados (2017-2022)", caption = 'Fonte: ObservaDH / Safernet.
     Elaboração dos Autores.')
 
 
@@ -215,12 +216,11 @@ ggplot(odio2022, aes(x = reorder(Tipo, n/1000), y = n/1000)) +
   geom_text(aes(label = n/1000), hjust = -0.5, color = "black", size = 3) +
   scale_y_continuous(breaks = seq(0,100, 10), limits = c(0,100))+
   tema_grafII()+ylab(" ")+
-  labs(title = "Gráfico 02 -  Crimes de Ódio Cometidos na Internet e
-                            Denunciados por Tipo (2022)", 
+  labs(title = "Gráfico 02 -  Casos de Crimes de Ódio Cometidos 
+              na Internet e Denunciados por Tipo (2022)", 
        caption = 'Fonte: ObservaDH / Safernet.
     Elaboração dos Autores.' )
-  #geom_bar(data = . %>% filter(Tipo == "Misogenia"), stat = "identity", color = "#606060",
-           #fill = "#606060", width = 0.9) 
+  
 
 
 
@@ -229,8 +229,8 @@ ggplot(misog, aes(x = Ano, y = n/1000, color = "n")) +
   geom_smooth(method = "lm", se = FALSE, color = "#A2A19F", linetype = "dashed") +
   scale_x_continuous(breaks = seq(2017, 2022, 1)) +ylab(" ")+
   scale_y_continuous(breaks = seq(0, 50, 10), limits = c(0, 50)) +
-  tema_graf()+labs(title = "Gráfico 03 - Crimes de Ódio Cometidos na Internet e
-                Denunciados - Misogenia  (2017-2022)", caption = 'Fonte: ObservaDH / Safernet.
+  tema_graf()+labs(title = "Gráfico 03 - Casos de Crimes de Ódio Cometidos na Internet e
+                    Denunciados - Misogenia  (2017-2022)", caption = 'Fonte: ObservaDH / Safernet.
     Elaboração dos Autores.')+xlab(" ")
 
 
@@ -242,8 +242,8 @@ ofensa %>%
   geom_text(aes(label = taxa), hjust = -0.5, color = "black", size = 3) +
   scale_y_continuous(breaks = seq(0,900, 100), limits = c(0,900))+
   tema_grafII()+ylab(" ")+
-  labs(title = "Gráfico 04 - Taxa de Ofensas, Xingamentos e Exposição Não
-                            Consentida - (2019)", 
+  labs(title = "Gráfico 04 - Taxa de Casos de Ofensas, Xingamentos e
+                      Exposição Não Consentida - (2019)", 
        caption = 'Fonte: ObservaDH / Pesquisa Nacional de Saúde (PNS).
     Elaboração dos Autores.' )
 
