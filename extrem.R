@@ -9,6 +9,8 @@ library(writexl)
 library("geobr")
 library(ggplot2)
 library(psych)
+library(rnaturalearthhires)
+library(rnaturalearth)
 
 ### Função 
 
@@ -246,4 +248,45 @@ ofensa %>%
                       Exposição Não Consentida - (2019)", 
        caption = 'Fonte: ObservaDH / Pesquisa Nacional de Saúde (PNS).
     Elaboração dos Autores.' )
+
+############################################# Ciberbullying #############################################
+
+Bullying <- read_excel("extrem.xlsx", sheet = "BullyingAno")
+
+# Série Temporal
+
+ggplot(Bullying, aes(x = Ano, y = n)) +
+  geom_line(size = 1, color = "#D10B1B") +
+  geom_smooth(method = "lm", se = FALSE, color = "#000000", linetype = "dashed") +
+  scale_x_continuous(breaks = seq(2012, 2023, 1)) +ylab(" ")+
+  scale_y_continuous(breaks = seq(0, 500, 50), limits = c(0, 500), ) +
+  geom_text(aes(label = n), size = 3, color = "#000000", nudge_y = 20) +
+  tema_graf()+labs(title = "Atendimento de Casos de Ciberbullying no Brasil (2012-2023)", 
+  caption = 'Fonte: Safernet.
+    Elaboração dos Autores.')+xlab(" ")
+
+
+##  Mapa
+
+BullyingUF <-  read_excel("extrem.xlsx", sheet = "Bullyinguf")
+
+brasil <- ne_states(country = "brazil", returnclass = "sf")
+
+brasil <- merge(brasil, BullyingUF, by.x = "postal", by.y = "UF", all.x = TRUE)
+
+
+brasil <- brasil %>%
+  mutate(Legenda = paste0(Bullying)) %>% 
+  replace(is.na(.),0)
+
+# Plote o mapa com preenchimento baseado na variável numérica (população)
+ggplot() +
+  geom_sf(data = brasil, aes(fill = Bullying), color = "black") +
+  geom_sf_text(data=brasil,aes(label = Legenda),size = 2.5, color="#FFFFFF") +
+  scale_fill_gradient(low = "#FF0000", high = "#800000",
+                      name="Atendimento")+xlab("X")+
+  theme_minimal()+theme(legend.position = "none")+
+  labs(title = "Atendimento de Casos de Ciberbullying por Estado", 
+       caption = 'Fonte: Safernet.
+    Elaboração dos Autores.')
 
